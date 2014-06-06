@@ -1,0 +1,11 @@
+!!!
+%html{:lang => "ja"}
+  %head
+    %meta{:charset => "utf-8"}
+    %title
+      upload
+  %body
+    %form{:method => "get", :action => "./upload"}
+      %input{:type => "text", :name => "pattern_name"}
+      %input{:type => "file", :name => "file", :enctype => "multipart/form-data"}
+      %input{:type => "submit", :value => "送信する"}
