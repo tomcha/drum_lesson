@@ -1,0 +1,6 @@
+%h1
+  新しいフレーズの登録
+%form{ method: "post", action: "/create", enctype: "multipart/form-data"}
+  %input{ type: "text", name: "pattern_name"}
+  %input{ type: "file", name: "file"}
+  %input{ type: "submit", value: "送信する"}

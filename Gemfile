@@ -5,6 +5,7 @@ source "https://rubygems.org"
 gem 'haml', ' ~>4.0.5'
 gem 'sinatra', ' ~>1.4.4'
 gem 'activerecord', ' ~>4.0.3'
+gem 'rmagick', '~>2.13.2'
 
 group :procuction do
   gem 'unicorn', ' ~>4.8.3'

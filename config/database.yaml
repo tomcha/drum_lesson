@@ -1,0 +1,15 @@
+production:
+  adapter: mysql2
+  encoding: utf8
+  database: drum_lesson
+  username: user
+  password: password
+  host: 127.0.0.1
+
+development:
+  adapter: sqlite3
+  database: db/drum_lesson.db
+
+test:
+  adapter: sqlite3
+  database: db/drum_lesson.test.db

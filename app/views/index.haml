@@ -1,0 +1,35 @@
+%h1
+  登録したフレーズ一覧
+%div
+  %a{ :href => '/new'}
+    新規登録
+%table
+  %thead
+    %tr
+      %th
+        ID
+      %th
+        Score
+      %th
+        Title
+      %th
+        Owner
+      %th
+        create at
+      %th
+        update at
+  %tbody
+    -@pictures.each do |picture|
+      %tr
+        %td
+          #{picture.id}
+        %td
+          %img{src: "/pictures/#{picture.md5hash}", width: "230", height: "100"}
+        %td
+          #{picture.realname}
+        %td
+          #{picture.owner_id}
+        %td
+          #{picture.created_at}
+        %td
+          #{picture.updated_at}
