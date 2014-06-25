@@ -7,7 +7,7 @@ require 'haml'
 
 require_relative 'models/pictures'
 require_relative 'models/score'
-require_relative 'models/score_pict_gen'
+require_relative 'models/post_score'
 require_relative 'db'
 
 class Drum_lesson < Sinatra::Base
@@ -17,7 +17,7 @@ class Drum_lesson < Sinatra::Base
       ENV['RACK_ENV']
     )
   end
-  set :public_folder, File.expand_path(File.join(root, '..', 'public'))
+  set :public_folder, File.expand_path(File.join( root, '..', 'public'))
 
 
   get '/' do
@@ -36,15 +36,15 @@ class Drum_lesson < Sinatra::Base
 
   post '/create' do
     if params[:file]
-      score = Score.new
-#      puts params[:file][:tempfile].to_s
-      score.pict_binary = Score_pict_gen.pict_resize(params[:file][:tempfile].read)
-      score.name = :pattern_name
-      save_path = "./public/pictures/#{score.to_md5}"
-      File.open(save_path, 'wb') do |f|
-        f.write tmpfile.read
+      save_path = File.expand_path( File.join( 'public', 'pictures'))
+      file_name = params[:file][:filename]
+      File.open("#{save_path}/#{file_name}", 'wb') do |f|
+        f.write params[:file][:tempfile].read
       end
-      Pictures.create!(realname: params[score.name], md5hash: picture.to_md5, owner_id: 'tomcha' )
+      Post_score.pict_resize("#{save_path}/#{file_name}")
+      File.rename( "#{save_path}/#{file_name}", "#{save_path}/#{Post_score.to_md5("#{save_path}/#{file_name}")}")
+    else 
+      redirect '/new'
     end
     redirect '/'
   end
